@@ -1,0 +1,129 @@
+Library = []
+
+
+class Book:
+    def __init__(self, name, author, year):
+        self.name = name
+        self.author = author
+        self.year = year
+
+    def print(self):
+        print(f"название книги: {self.name}"
+              f"\nавтор: {self.author}"
+              f"\nгод издания: {self.year}")
+
+    def getname(self):
+        return self.name
+
+    def setname(self, name):
+        self.name = name
+
+    def getauthor(self):
+        return self.author
+
+    def setauthor(self, author):
+        self.author = author
+
+    def getyear(self):
+        return self.year
+
+    def setyear(self, year):
+        self.year = year
+
+
+def getfield(helpstr, oldval):
+    a = input(helpstr).strip()
+    if a != '':
+        return a
+    return oldval
+
+
+while True:
+    print(f"введите цифру от 1 до 6, чтобы:\n"
+          f"1 - список книг\n"
+          f"2 - добавить книгу\n"
+          f"3 - изменить книгу\n"
+          f"4 - поиск\n"
+          f"5 - удалить книгу\n"
+          f"6 - выход")
+    n = int(input())
+    if n == 1:
+        print(f"список доступных книг:")
+
+        for i in range(len(Library)):
+            print(f"№{i + 1}")
+            Library[i].print()
+    elif n == 2:
+        print("введите даные новой книги:")
+        name = input("название книги: ")
+        author = input("автор: ")
+        year = input("год публикации: ")
+        Library.append(Book(name, author, year))
+    elif n == 3:
+        print("введите данные измененной книги:\n")
+        booknum = int(input("изменение книги №"))
+        name = getfield("название книги: ", Library[booknum - 1].getname())
+        author = getfield("автор: ", Library[booknum - 1].getauthor())
+        year = int(getfield("год публикации: ", Library[booknum - 1].getyear()))
+        Library[booknum - 1] = Book(name, author, year)
+    elif n == 5:
+
+        del Library[int(input("удаление книги №")) - 1]
+    elif n == 4:
+        searching = input("введите ключ поиска: ")
+        result = filter(lambda book: searching.lower() in book.name.lower() or searching.lower() in
+                                     book.author.lower() or searching == book.year, Library)
+        for i, book in enumerate(result, 1):
+            print(f"№{i}")
+            book.print()
+    elif n == 6:
+        break
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
